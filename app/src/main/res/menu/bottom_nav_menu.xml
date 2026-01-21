@@ -1,12 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
         android:title="@string/title_home"
         android:icon="@android:drawable/ic_menu_agenda" />
+
     <item
         android:id="@+id/socialFragment"
         android:title="@string/title_social"
-        android:icon="@android:drawable/ic_menu_my_calendar" />
+        android:icon="@android:drawable/ic_menu_share" />
+
     <item
         android:id="@+id/profileFragment"
         android:title="@string/title_profile"

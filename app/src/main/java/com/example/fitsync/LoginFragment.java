@@ -10,7 +10,7 @@ import androidx.navigation.Navigation;
 
 public class LoginFragment extends Fragment {
 
-    // Constructor que indica qué layout usar
+    // Constructor que carga el diseño XML del login
     public LoginFragment() {
         super(R.layout.fragment_login);
     }
@@ -19,12 +19,14 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Buscar el botón por su ID (Asegúrate que en el XML sea @+id/btnLogin)
         Button btnLogin = view.findViewById(R.id.btnLogin);
 
+        // Configurar el click
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navegar usando el ID de la acción definido en nav_graph.xml
+                // Navegar hacia el Home usando la acción definida en el grafo
                 Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_homeFragment);
             }
         });

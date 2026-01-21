@@ -18,30 +18,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. Configurar BottomNavigationView
+        // 1. Encontrar la barra de navegación inferior (BottomNavigationView)
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_view);
 
-        // 2. Obtener el NavController desde el NavHostFragment
-        // (Nota: usar findNavController directamente en onCreate a veces falla con FragmentContainerView, esta es la forma segura)
+        // 2. Encontrar el NavHostFragment (el contenedor de las pantallas)
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
 
         if (navHostFragment != null) {
+            // 3. Obtener el controlador de navegación
             NavController navController = navHostFragment.getNavController();
 
-            // 3. Vincular el menú con el controlador de navegación
+            // 4. Vincular la barra inferior con el controlador (¡Esto hace que los botones funcionen!)
             NavigationUI.setupWithNavController(bottomNav, navController);
 
-            // 4. Lógica para ocultar la barra inferior en la pantalla de Login
+            // 5. Lógica para ocultar la barra inferior si estamos en el Login
             navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
                 @Override
                 public void onDestinationChanged(@NonNull NavController controller,
                                                  @NonNull NavDestination destination,
                                                  @Nullable Bundle arguments) {
                     if (destination.getId() == R.id.loginFragment) {
-                        bottomNav.setVisibility(View.GONE);
+                        bottomNav.setVisibility(View.GONE); // Ocultar en Login
                     } else {
-                        bottomNav.setVisibility(View.VISIBLE);
+                        bottomNav.setVisibility(View.VISIBLE); // Mostrar en el resto
                     }
                 }
             });

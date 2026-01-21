@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FitSync</string>
     <string name="title_home">Plan</string>
-    <string name="title_progress">Progreso</string>
     <string name="title_social">Comunidad</string>
     <string name="title_profile">Perfil</string>
-    <string name="btn_login">Entrar</string>
+    <string name="login_title">Bienvenido a FitSync</string>
+    <string name="login_button">Entrar</string>
 </resources>
