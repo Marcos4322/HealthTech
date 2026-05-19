@@ -108,17 +108,8 @@
                     android:gravity="center"
                     android:background="@drawable/btn_grey_rounded"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_height="50dp" />
 
-                <TextView
-                    android:text="  Continuar con Apple"
-                    android:textStyle="bold"
-                    android:textColor="#424242"
-                    android:gravity="center"
-                    android:background="@drawable/btn_grey_rounded"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
             </LinearLayout>
 
         </LinearLayout>
