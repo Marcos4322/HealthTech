@@ -62,11 +62,58 @@
         android:id="@+id/socialFragment"
         android:name="com.example.fitsync.SocialFragment"
         android:label="@string/title_social"
-        tools:layout="@layout/fragment_social" />
+        tools:layout="@layout/fragment_social">
+
+        <action
+            android:id="@+id/action_socialFragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+
+        <action
+            android:id="@+id/action_socialFragment_to_addFriendsFragment"
+            app:destination="@id/addFriendsFragment" />
+
+        <action
+            android:id="@+id/action_socialFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+
+        <action
+            android:id="@+id/action_socialFragment_to_groupsFragment"
+            app:destination="@id/groupsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fitsync.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="com.example.fitsync.FriendsFragment"
+        android:label="Amigos"
+        tools:layout="@layout/fragment_friends">
+
+        <action
+            android:id="@+id/action_friendsFragment_to_addFriendsFragment"
+            app:destination="@id/addFriendsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFriendsFragment"
+        android:name="com.example.fitsync.AddFriendsFragment"
+        android:label="Encontrar Amigos"
+        tools:layout="@layout/fragment_add_friends" />
+
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.fitsync.RankingFragment"
+        android:label="Ranking"
+        tools:layout="@layout/fragment_ranking" />
+
+    <fragment
+        android:id="@+id/groupsFragment"
+        android:name="com.example.fitsync.GroupsFragment"
+        android:label="Grupos"
+        tools:layout="@layout/fragment_groups" />
+
 </navigation>

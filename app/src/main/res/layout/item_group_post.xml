@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#242424"
+    android:layout_marginBottom="12dp"
+    android:paddingBottom="12dp">
+
+    <!-- Cabecera: avatar + nombre + grupo + tiempo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <!-- Avatar placeholder -->
+        <View
+            android:id="@+id/imgAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#3A3A3A"
+            android:layout_marginEnd="10dp" />
+
+        <!-- Nombre, grupo y tiempo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAuthorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paula Gómez"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hace 5 minutos"
+                    android:textColor="#888888"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" · "
+                    android:textColor="#888888"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tvGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gym Crew"
+                    android:textColor="#CC0000"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Texto del post -->
+    <TextView
+        android:id="@+id/tvPostText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="10dp"
+        android:text="¡Nuevo récord personal en sentadillas! Superando mis límites. #fitness #gymlife"
+        android:textColor="#DDDDDD"
+        android:textSize="14sp"
+        android:lineSpacingMultiplier="1.3" />
+
+    <!-- Imagen del post (oculta por defecto, mostrar si hay imagen) -->
+    <ImageView
+        android:id="@+id/ivPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:background="#2C2C2C"
+        android:visibility="gone" />
+
+    <!-- Acciones: likes, comentarios, compartir -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="♡  128"
+            android:textColor="#CCCCCC"
+            android:textSize="13sp"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:id="@+id/tvComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💬  15"
+            android:textColor="#CCCCCC"
+            android:textSize="13sp"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:id="@+id/tvShares"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="↗  8"
+            android:textColor="#CCCCCC"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

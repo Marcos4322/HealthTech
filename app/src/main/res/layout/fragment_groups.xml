@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A1A">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Grupos"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Icono búsqueda sustituido por texto -->
+            <TextView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="🔍"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- Botones Crear / Unirse -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <Button
+                android:id="@+id/btnCreateGroup"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="+ Crear Grupo"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:backgroundTint="#CC0000"
+                app:cornerRadius="20dp" />
+
+            <Button
+                android:id="@+id/btnJoinGroup"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Unirse a un Grupo"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:backgroundTint="#3A3A3A"
+                app:cornerRadius="20dp" />
+
+        </LinearLayout>
+
+        <!-- Chips de categorías -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chipTodos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Todos"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:background="#CC0000"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipRunning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Running Club"
+                    android:textColor="#CCCCCC"
+                    android:textSize="13sp"
+                    android:background="#2C2C2C"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipYoga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Yoga Fans"
+                    android:textColor="#CCCCCC"
+                    android:textSize="13sp"
+                    android:background="#2C2C2C"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipGym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Gym Crew"
+                    android:textColor="#CCCCCC"
+                    android:textSize="13sp"
+                    android:background="#2C2C2C"
+                    android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <!-- Feed de publicaciones -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerGroups"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <!-- FAB + (sin drawable, texto) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNewPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="#CC0000"
+        app:elevation="6dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
