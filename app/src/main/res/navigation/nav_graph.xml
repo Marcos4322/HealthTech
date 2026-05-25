@@ -56,7 +56,12 @@
         android:id="@+id/homeFragment"
         android:name="com.example.fitsync.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_generateRoutineFragment"
+            app:destination="@id/generateRoutineFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/socialFragment"
@@ -115,5 +120,22 @@
         android:name="com.example.fitsync.GroupsFragment"
         android:label="Grupos"
         tools:layout="@layout/fragment_groups" />
+
+    <fragment
+        android:id="@+id/generateRoutineFragment"
+        android:name="com.example.fitsync.GenerateRoutineFragment"
+        android:label="Generar Rutina"
+        tools:layout="@layout/fragment_generate_routine">
+
+        <action
+            android:id="@+id/action_generateRoutineFragment_to_rutinaDetailFragment"
+            app:destination="@id/rutinaDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rutinaDetailFragment"
+        android:name="com.example.fitsync.RutinaDetailFragment"
+        android:label="Detalle Rutina"
+        tools:layout="@layout/fragment_rutina_detail" />
 
 </navigation>
