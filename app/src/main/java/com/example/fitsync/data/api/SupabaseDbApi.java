@@ -12,6 +12,8 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
+import retrofit2.http.DELETE;
+
 public interface SupabaseDbApi {
 
     @GET("rest/v1/profiles")
@@ -65,5 +67,11 @@ public interface SupabaseDbApi {
             @Query("creada_por") String creadaPorFilter,
             @Query("select") String select,
             @Query("order") String order
+    );
+
+    @DELETE("rest/v1/rutinas")
+    Call<Void> deleteRutina(
+            @Header("Authorization") String bearerToken,
+            @Query("id") String idFilter
     );
 }

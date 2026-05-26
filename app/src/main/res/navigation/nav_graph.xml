@@ -10,20 +10,9 @@
         android:name="com.example.fitsync.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-
-        <action
-            android:id="@+id/action_loginFragment_to_emailLoginFragment"
-            app:destination="@id/emailLoginFragment" />
-
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        <action android:id="@+id/action_loginFragment_to_registerFragment" app:destination="@id/registerFragment" />
+        <action android:id="@+id/action_loginFragment_to_emailLoginFragment" app:destination="@id/emailLoginFragment" />
+        <action android:id="@+id/action_loginFragment_to_homeFragment" app:destination="@id/homeFragment" app:popUpTo="@id/loginFragment" app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -31,12 +20,7 @@
         android:name="com.example.fitsync.RegisterFragment"
         android:label="Registro"
         tools:layout="@layout/fragment_register">
-
-        <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        <action android:id="@+id/action_registerFragment_to_homeFragment" app:destination="@id/homeFragment" app:popUpTo="@id/loginFragment" app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -44,12 +28,7 @@
         android:name="com.example.fitsync.EmailLoginFragment"
         android:label="Iniciar sesión"
         tools:layout="@layout/fragment_email_login">
-
-        <action
-            android:id="@+id/action_emailLoginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        <action android:id="@+id/action_emailLoginFragment_to_homeFragment" app:destination="@id/homeFragment" app:popUpTo="@id/loginFragment" app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -57,10 +36,8 @@
         android:name="com.example.fitsync.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_homeFragment_to_generateRoutineFragment"
-            app:destination="@id/generateRoutineFragment" />
+        <action android:id="@+id/action_homeFragment_to_generateRoutineFragment" app:destination="@id/generateRoutineFragment" />
+        <action android:id="@+id/action_homeFragment_to_rutinaDetailFragment" app:destination="@id/rutinaDetailFragment" />
     </fragment>
 
     <fragment
@@ -68,22 +45,10 @@
         android:name="com.example.fitsync.SocialFragment"
         android:label="@string/title_social"
         tools:layout="@layout/fragment_social">
-
-        <action
-            android:id="@+id/action_socialFragment_to_friendsFragment"
-            app:destination="@id/friendsFragment" />
-
-        <action
-            android:id="@+id/action_socialFragment_to_addFriendsFragment"
-            app:destination="@id/addFriendsFragment" />
-
-        <action
-            android:id="@+id/action_socialFragment_to_rankingFragment"
-            app:destination="@id/rankingFragment" />
-
-        <action
-            android:id="@+id/action_socialFragment_to_groupsFragment"
-            app:destination="@id/groupsFragment" />
+        <action android:id="@+id/action_socialFragment_to_friendsFragment" app:destination="@id/friendsFragment" />
+        <action android:id="@+id/action_socialFragment_to_addFriendsFragment" app:destination="@id/addFriendsFragment" />
+        <action android:id="@+id/action_socialFragment_to_rankingFragment" app:destination="@id/rankingFragment" />
+        <action android:id="@+id/action_socialFragment_to_groupsFragment" app:destination="@id/groupsFragment" />
     </fragment>
 
     <fragment
@@ -97,10 +62,7 @@
         android:name="com.example.fitsync.FriendsFragment"
         android:label="Amigos"
         tools:layout="@layout/fragment_friends">
-
-        <action
-            android:id="@+id/action_friendsFragment_to_addFriendsFragment"
-            app:destination="@id/addFriendsFragment" />
+        <action android:id="@+id/action_friendsFragment_to_addFriendsFragment" app:destination="@id/addFriendsFragment" />
     </fragment>
 
     <fragment
@@ -126,16 +88,37 @@
         android:name="com.example.fitsync.GenerateRoutineFragment"
         android:label="Generar Rutina"
         tools:layout="@layout/fragment_generate_routine">
-
-        <action
-            android:id="@+id/action_generateRoutineFragment_to_rutinaDetailFragment"
-            app:destination="@id/rutinaDetailFragment" />
+        <action android:id="@+id/action_generateRoutineFragment_to_rutinaDetailFragment" app:destination="@id/rutinaDetailFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/rutinaDetailFragment"
         android:name="com.example.fitsync.RutinaDetailFragment"
         android:label="Detalle Rutina"
-        tools:layout="@layout/fragment_rutina_detail" />
+        tools:layout="@layout/fragment_rutina_detail">
+        <action android:id="@+id/action_rutinaDetailFragment_to_workoutFragment" app:destination="@id/workoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="com.example.fitsync.WorkoutFragment"
+        android:label="Entrenamiento"
+        tools:layout="@layout/fragment_workout">
+        <action
+            android:id="@+id/action_workoutFragment_to_workoutSummaryFragment"
+            app:destination="@id/workoutSummaryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutSummaryFragment"
+        android:name="com.example.fitsync.WorkoutSummaryFragment"
+        android:label="Resumen"
+        tools:layout="@layout/fragment_workout_summary">
+        <action
+            android:id="@+id/action_workoutSummaryFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

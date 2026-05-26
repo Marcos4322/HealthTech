@@ -48,6 +48,61 @@
                 app:tint="@color/black"/>
         </LinearLayout>
 
+        <!-- ── Mis Rutinas ── -->
+        <LinearLayout
+            android:id="@+id/sectionMisRutinas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:text="Mis Rutinas"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- Estado vacío -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyRutinas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="24dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_dumbbell"
+                    app:tint="@color/text_grey"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Aún no tienes rutinas.\n¡Genera tu primera rutina!"
+                    android:gravity="center"
+                    android:textColor="@color/text_grey"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <!-- Lista de rutinas -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMisRutinas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

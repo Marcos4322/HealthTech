@@ -141,4 +141,66 @@ public class RutinaRepository {
                     }
                 });
     }
+    public interface MyRutinasCallback {
+        void onSuccess(List<Rutina> rutinas);
+        void onError(String message);
+    }
+
+    public void getMyRutinas(MyRutinasCallback cb) {
+        String token = session.getAccessToken();
+        String userId = session.getUserId(); // necesitamos esto — ver nota abajo
+        if (token == null || userId == null) {
+            cb.onError("No hay sesión activa");
+            return;
+        }
+
+        SupabaseClient.getDbApi()
+                .listMyRutinas(
+                        "Bearer " + token,
+                        "eq." + userId,
+                        "*",
+                        "created_at.desc"
+                )
+                .enqueue(new Callback<List<Rutina>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<Rutina>> call,
+                                           @NonNull Response<List<Rutina>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            cb.onSuccess(response.body());
+                        } else {
+                            cb.onError("Error " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<Rutina>> call, @NonNull Throwable t) {
+                        cb.onError("Sin conexión: " + t.getMessage());
+                    }
+                });
+    }
+
+    public interface DeleteCallback {
+        void onSuccess();
+        void onError(String message);
+    }
+
+    public void deleteRutina(String rutinaId, DeleteCallback cb) {
+        String token = session.getAccessToken();
+        if (token == null) { cb.onError("No hay sesión activa"); return; }
+
+        SupabaseClient.getDbApi()
+                .deleteRutina("Bearer " + token, "eq." + rutinaId)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call,
+                                           @NonNull Response<Void> response) {
+                        if (response.isSuccessful()) cb.onSuccess();
+                        else cb.onError("Error " + response.code());
+                    }
+                    @Override
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                        cb.onError("Sin conexión: " + t.getMessage());
+                    }
+                });
+    }
 }
