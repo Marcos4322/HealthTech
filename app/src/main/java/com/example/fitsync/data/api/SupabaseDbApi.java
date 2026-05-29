@@ -1,5 +1,18 @@
 package com.example.fitsync.data.api;
 
+import com.example.fitsync.data.model.Amigo;
+import com.example.fitsync.data.model.AmistadInsert;
+import com.example.fitsync.data.model.AmistadUpdate;
+import com.example.fitsync.data.model.SolicitudPendiente;
+import com.example.fitsync.data.model.UsuarioBuscado;
+
+import java.util.Map;
+
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+
 import com.example.fitsync.data.model.Profile;
 import com.example.fitsync.data.model.Rutina;
 import com.example.fitsync.data.model.RutinaEjercicio;
@@ -71,6 +84,67 @@ public interface SupabaseDbApi {
 
     @DELETE("rest/v1/rutinas")
     Call<Void> deleteRutina(
+            @Header("Authorization") String bearerToken,
+            @Query("id") String idFilter
+    );
+
+    // ── AMIGOS ──
+
+    /**
+     * Buscar usuarios por username (función RPC).
+     * POST /rest/v1/rpc/buscar_usuarios
+     */
+    @POST("rest/v1/rpc/buscar_usuarios")
+    Call<List<UsuarioBuscado>> buscarUsuarios(
+            @Header("Authorization") String bearerToken,
+            @Body java.util.Map<String, String> params
+    );
+
+    /**
+     * Solicitudes de amistad pendientes (función RPC).
+     * POST /rest/v1/rpc/mis_solicitudes_pendientes
+     */
+    @POST("rest/v1/rpc/mis_solicitudes_pendientes")
+    Call<List<SolicitudPendiente>> misSolicitudesPendientes(
+            @Header("Authorization") String bearerToken
+    );
+
+    /**
+     * Mis amigos aceptados (función RPC).
+     * POST /rest/v1/rpc/mis_amigos
+     */
+    @POST("rest/v1/rpc/mis_amigos")
+    Call<List<Amigo>> misAmigos(
+            @Header("Authorization") String bearerToken
+    );
+
+    /**
+     * Enviar solicitud de amistad.
+     * POST /rest/v1/amistades
+     */
+    @POST("rest/v1/amistades")
+    Call<Void> enviarSolicitud(
+            @Header("Authorization") String bearerToken,
+            @Body AmistadInsert body
+    );
+
+    /**
+     * Aceptar o rechazar solicitud.
+     * PATCH /rest/v1/amistades?id=eq.<id>
+     */
+    @PATCH("rest/v1/amistades")
+    Call<Void> actualizarAmistad(
+            @Header("Authorization") String bearerToken,
+            @Query("id") String idFilter,
+            @Body AmistadUpdate body
+    );
+
+    /**
+     * Eliminar amistad.
+     * DELETE /rest/v1/amistades?id=eq.<id>
+     */
+    @DELETE("rest/v1/amistades")
+    Call<Void> eliminarAmistad(
             @Header("Authorization") String bearerToken,
             @Query("id") String idFilter
     );
