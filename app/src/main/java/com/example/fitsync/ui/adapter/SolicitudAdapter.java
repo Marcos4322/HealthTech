@@ -1,4 +1,4 @@
-package com.example.fitsync;
+package com.example.fitsync.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitsync.R;
 import com.example.fitsync.data.model.SolicitudPendiente;
 
 import java.util.ArrayList;

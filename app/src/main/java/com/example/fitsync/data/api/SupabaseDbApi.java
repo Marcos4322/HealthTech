@@ -148,4 +148,12 @@ public interface SupabaseDbApi {
             @Header("Authorization") String bearerToken,
             @Query("id") String idFilter
     );
+    // Ranking global: todos los perfiles ordenados por nivel desc
+    @GET("rest/v1/profiles")
+    Call<List<Profile>> getRanking(
+            @Header("Authorization") String bearerToken,
+            @Query("select") String select,
+            @Query("order") String order,
+            @Query("limit") String limit
+    );
 }

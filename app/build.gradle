@@ -17,15 +17,25 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // Cargar credenciales de Supabase desde local.properties
         Properties properties = new Properties()
         def localPropertiesFile = rootProject.file('local.properties')
         if (localPropertiesFile.exists()) {
             properties.load(new FileInputStream(localPropertiesFile))
         }
-        buildConfigField "String", "SUPABASE_URL", "\"${properties.getProperty('SUPABASE_URL', '')}\""
-        buildConfigField "String", "SUPABASE_ANON_KEY", "\"${properties.getProperty('SUPABASE_ANON_KEY', '')}\""
-        buildConfigField "String", "SUPABASE_PUBLISHABLE_KEY", "\"${properties.getProperty('SUPABASE_PUBLISHABLE_KEY', '')}\""
+
+        // Limpiar la URL por si viene con \:// escapado
+        def supabaseUrl = properties.getProperty('SUPABASE_URL', '')
+                .replace('\\:', ':')
+                .trim()
+
+        buildConfigField "String", "SUPABASE_URL", "\"${supabaseUrl}\""
+        buildConfigField "String", "SUPABASE_ANON_KEY", "\"${properties.getProperty('SUPABASE_ANON_KEY', '').trim()}\""
+        // Usa la ANON_KEY como fallback si no tienes PUBLISHABLE_KEY todavía
+        def publishableKey = properties.getProperty('SUPABASE_PUBLISHABLE_KEY', '').trim()
+        if (publishableKey.isEmpty()) {
+            publishableKey = properties.getProperty('SUPABASE_ANON_KEY', '').trim()
+        }
+        buildConfigField "String", "SUPABASE_PUBLISHABLE_KEY", "\"${publishableKey}\""
     }
 
     buildFeatures {
@@ -39,6 +49,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -58,7 +69,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    // Retrofit + OkHttp para Supabase
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'

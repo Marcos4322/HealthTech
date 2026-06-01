@@ -17,6 +17,18 @@ public class SupabaseClient {
     private static SupabaseDbApi dbApi;
     private static SupabaseFunctionsApi functionsApi;
 
+    /**
+     * Limpia y valida la URL base para Retrofit.
+     * Retrofit exige que la baseUrl acabe en '/' y sea una URL válida.
+     */
+    private static String getBaseUrl() {
+        String url = BuildConfig.SUPABASE_URL
+                .replace("\\:", ":")   // por si viene escapada de local.properties
+                .trim();
+        if (!url.endsWith("/")) url = url + "/";
+        return url;
+    }
+
     private static OkHttpClient buildClient(String apiKey) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(BuildConfig.DEBUG
@@ -38,13 +50,10 @@ public class SupabaseClient {
                 .build();
     }
 
-    /**
-     * Cliente para Auth + REST (usa la anon legacy, sigue funcionando bien aquí).
-     */
     private static Retrofit getRetrofitRest() {
         if (retrofitRest == null) {
             retrofitRest = new Retrofit.Builder()
-                    .baseUrl(BuildConfig.SUPABASE_URL + "/")
+                    .baseUrl(getBaseUrl())
                     .client(buildClient(BuildConfig.SUPABASE_ANON_KEY))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -52,13 +61,10 @@ public class SupabaseClient {
         return retrofitRest;
     }
 
-    /**
-     * Cliente para Edge Functions (requiere la nueva publishable key).
-     */
     private static Retrofit getRetrofitFunctions() {
         if (retrofitFunctions == null) {
             retrofitFunctions = new Retrofit.Builder()
-                    .baseUrl(BuildConfig.SUPABASE_URL + "/")
+                    .baseUrl(getBaseUrl())
                     .client(buildClient(BuildConfig.SUPABASE_PUBLISHABLE_KEY))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

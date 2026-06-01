@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fitsync.data.model.SolicitudPendiente;
 import com.example.fitsync.data.model.UsuarioBuscado;
 import com.example.fitsync.data.repository.AmigosRepository;
+import com.example.fitsync.ui.adapter.BusquedaAdapter;
+import com.example.fitsync.ui.adapter.SolicitudAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 
