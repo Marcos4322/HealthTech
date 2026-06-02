@@ -63,7 +63,20 @@
         android:id="@+id/friendsFragment"
         android:name="com.example.fitsync.FriendsFragment"
         android:label="Amigos"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends">
+        <action android:id="@+id/action_friendsFragment_to_friendDetailFragment"
+            app:destination="@id/friendDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/friendDetailFragment"
+        android:name="com.example.fitsync.FriendDetailFragment"
+        android:label="Perfil de amigo"
+        tools:layout="@layout/fragment_friend_detail">
+        <argument android:name="amigoId" app:argType="string"/>
+        <argument android:name="amistadId" app:argType="string"/>
+        <argument android:name="username" app:argType="string"/>
+    </fragment>
 
     <fragment
         android:id="@+id/addFriendsFragment"

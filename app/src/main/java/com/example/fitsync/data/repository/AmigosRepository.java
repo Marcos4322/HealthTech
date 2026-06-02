@@ -12,7 +12,6 @@ import com.example.fitsync.data.model.SolicitudPendiente;
 import com.example.fitsync.data.model.UsuarioBuscado;
 import com.example.fitsync.data.session.SessionManager;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,6 +151,29 @@ public class AmigosRepository {
 
         SupabaseClient.getDbApi()
                 .actualizarAmistad("Bearer " + token, "eq." + amistadId, new AmistadUpdate(estado))
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            cb.onSuccess();
+                        } else {
+                            cb.onError("Error " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                        cb.onError("Sin conexión: " + t.getMessage());
+                    }
+                });
+    }
+
+    public void eliminarAmistad(String amistadId, ActionCallback cb) {
+        String token = session.getAccessToken();
+        if (token == null) { cb.onError("No hay sesión"); return; }
+
+        SupabaseClient.getDbApi()
+                .eliminarAmistad("Bearer " + token, "eq." + amistadId)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {

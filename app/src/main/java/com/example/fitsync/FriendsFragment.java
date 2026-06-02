@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,12 +53,27 @@ public class FriendsFragment extends Fragment {
 
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        // Botón volver
         view.findViewById(R.id.btnBack).setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
 
-        // Adapters
-        amigosAdapter   = new AmigosAdapter(new java.util.ArrayList<>());
+        amigosAdapter = new AmigosAdapter(new java.util.ArrayList<>());
+        amigosAdapter.setOnAmigoListener(new AmigosAdapter.OnAmigoListener() {
+            @Override
+            public void onClick(Amigo amigo, int position) {
+                Bundle args = new Bundle();
+                args.putString("amigoId", amigo.getAmigoId());
+                args.putString("amistadId", amigo.getAmistadId());
+                args.putString("username", amigo.getUsername());
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_friendsFragment_to_friendDetailFragment, args);
+            }
+
+            @Override
+            public void onEliminar(Amigo amigo, int position) {
+                confirmarEliminar(amigo, position);
+            }
+        });
+
         busquedaAdapter = new BusquedaAdapter(this::onEnviarSolicitud);
         solicitudAdapter = new SolicitudAdapter(new SolicitudAdapter.OnSolicitudListener() {
             @Override
@@ -70,7 +86,6 @@ public class FriendsFragment extends Fragment {
             }
         });
 
-        // Tabs
         TabLayout tabs = view.findViewById(R.id.tabLayoutFriends);
         tabs.addTab(tabs.newTab().setText("Mis Amigos"));
         tabs.addTab(tabs.newTab().setText("Buscar"));
@@ -100,11 +115,9 @@ public class FriendsFragment extends Fragment {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        // Cargar tab inicial
         recycler.setAdapter(amigosAdapter);
         cargarAmigos();
 
-        // Búsqueda al pulsar enter
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH
                     || actionId == EditorInfo.IME_ACTION_DONE) {
@@ -135,6 +148,39 @@ public class FriendsFragment extends Fragment {
                 if (!isAdded()) return;
                 requireActivity().runOnUiThread(() ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show());
+            }
+        });
+    }
+
+    private void confirmarEliminar(Amigo amigo, int position) {
+        String nombre = amigo.getNombreCompleto() != null
+                ? amigo.getNombreCompleto() : amigo.getUsername();
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Eliminar amigo")
+                .setMessage("¿Seguro que quieres eliminar a " + nombre + " de tus amigos?")
+                .setPositiveButton("Eliminar", (dialog, which) -> eliminarAmigo(amigo, position))
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    private void eliminarAmigo(Amigo amigo, int position) {
+        repo.eliminarAmistad(amigo.getAmistadId(), new AmigosRepository.ActionCallback() {
+            @Override
+            public void onSuccess() {
+                if (!isAdded()) return;
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(requireContext(),
+                            "Amigo eliminado", Toast.LENGTH_SHORT).show();
+                    amigosAdapter.removeItem(position);
+                });
+            }
+            @Override
+            public void onError(String message) {
+                if (!isAdded()) return;
+                requireActivity().runOnUiThread(() ->
+                        Toast.makeText(requireContext(),
+                                "Error: " + message, Toast.LENGTH_SHORT).show());
             }
         });
     }
@@ -179,7 +225,7 @@ public class FriendsFragment extends Fragment {
                     Toast.makeText(requireContext(),
                             "Solicitud enviada a @" + usuario.getUsername(),
                             Toast.LENGTH_SHORT).show();
-                    buscar(); // refresca para actualizar estado
+                    buscar();
                 });
             }
             @Override

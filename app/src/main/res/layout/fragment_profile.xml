@@ -3,31 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#000000"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
+        <!-- ── HEADER con degradado ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="24dp">
+            android:gravity="center"
+            android:background="@drawable/bg_profile_header"
+            android:paddingTop="40dp"
+            android:paddingBottom="32dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_image"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@color/fitsync_red"
-                app:shapeAppearanceOverlay="@style/CircleImage"
-                android:padding="3dp"
-                app:strokeColor="@color/fitsync_red"
-                app:strokeWidth="3dp"/>
+            <!-- Avatar con anillo -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="124dp"
+                    android:layout_height="124dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_avatar_ring"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+                    android:layout_gravity="center"
+                    android:src="@color/fitsync_red"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/CircleImage"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_profile_username"
@@ -35,101 +50,141 @@
                 android:layout_height="wrap_content"
                 android:text="morillas_fit8"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="18dp"/>
 
             <TextView
                 android:id="@+id/tv_profile_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jose Morillas • Nivel 12"
-                android:textColor="#B0B0B0"
-                android:textSize="14sp"/>
+                android:text="Nivel 1 • 0 días de racha"
+                android:textColor="#C0C0C0"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <GridLayout
+        <!-- ── TARJETA DE STATS (3 columnas) ── -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:alignmentMode="alignMargins"
-            android:layout_marginBottom="24dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="-24dp"
+            app:cardBackgroundColor="#161618"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:cardBackgroundColor="#1C1C1E"
-                app:cardCornerRadius="20dp">
+                android:orientation="horizontal"
+                android:paddingVertical="20dp">
+
+                <!-- Entrenos -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="20dp"
                     android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Entrenos"
-                        android:textColor="#B0B0B0"
-                        android:textSize="11sp"/>
                     <TextView
                         android:id="@+id/tv_entrenos_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:cardBackgroundColor="#1C1C1E"
-                app:cardCornerRadius="20dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Racha"
-                        android:textColor="#B0B0B0"
-                        android:textSize="11sp"/>
+                        android:text="Entrenos"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_stat_divider"/>
+
+                <!-- Racha -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
                     <TextView
                         android:id="@+id/tv_racha_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 Días"
                         android:textColor="@color/fitsync_red"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Racha"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </GridLayout>
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_stat_divider"/>
+
+                <!-- Logros (estático) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logros"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── LOGROS ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tus Logros"
-            android:textColor="#B0B0B0"
-            android:textSize="12sp"
+            android:textColor="#888888"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="14dp"/>
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:layout_marginBottom="32dp">
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:clipToPadding="false">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,19 +197,19 @@
                     android:gravity="center"
                     android:layout_marginEnd="20dp">
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:background="@drawable/bg_card_dark"
-                        android:padding="15dp"
+                        android:padding="16dp"
                         android:src="@drawable/ic_fire"
                         app:tint="@color/fitsync_red"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calorias"
+                        android:text="Calorías"
                         android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:layout_marginTop="4dp"/>
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -164,10 +219,10 @@
                     android:gravity="center"
                     android:layout_marginEnd="20dp">
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:background="@drawable/bg_card_dark"
-                        android:padding="15dp"
+                        android:padding="16dp"
                         android:src="@drawable/ic_dumbbell"
                         app:tint="@color/fitsync_red"/>
                     <TextView
@@ -175,34 +230,40 @@
                         android:layout_height="wrap_content"
                         android:text="Fuerza"
                         android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:layout_marginTop="4dp"/>
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
                 </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
+        <!-- ── CONFIGURACIÓN ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Configuración"
-            android:textColor="#B0B0B0"
-            android:textSize="12sp"
+            android:textColor="#888888"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="14dp"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btn_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#1C1C1E"
-            app:cardCornerRadius="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#161618"
+            app:cardCornerRadius="18dp"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="18dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ImageView
@@ -216,6 +277,7 @@
                     android:layout_weight="1"
                     android:text="Editar Perfil"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
                     android:layout_marginStart="16dp"/>
                 <ImageView
                     android:layout_width="20dp"
@@ -229,13 +291,18 @@
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#1C1C1E"
-            app:cardCornerRadius="16dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="#161618"
+            app:cardCornerRadius="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="18dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ImageView
@@ -249,6 +316,7 @@
                     android:text="Cerrar Sesión"
                     android:textColor="@color/fitsync_red"
                     android:textStyle="bold"
+                    android:textSize="15sp"
                     android:layout_marginStart="16dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -16,10 +16,20 @@ import java.util.List;
 
 public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.VH> {
 
+    public interface OnAmigoListener {
+        void onClick(Amigo amigo, int position);
+        void onEliminar(Amigo amigo, int position);
+    }
+
     private final List<Amigo> lista;
+    private OnAmigoListener listener;
 
     public AmigosAdapter(List<Amigo> lista) {
         this.lista = new ArrayList<>(lista);
+    }
+
+    public void setOnAmigoListener(OnAmigoListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +47,18 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.VH> {
                 ? amigo.getNombreCompleto() : amigo.getUsername());
         holder.tvUsername.setText("@" + amigo.getUsername());
         holder.tvStreak.setText("Nv. " + amigo.getNivel());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onClick(amigo, holder.getAdapterPosition());
+            }
+        });
+
+        holder.btnEliminar.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEliminar(amigo, holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -48,13 +70,21 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.VH> {
         notifyDataSetChanged();
     }
 
+    public void removeItem(int position) {
+        if (position >= 0 && position < lista.size()) {
+            lista.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
     static class VH extends RecyclerView.ViewHolder {
-        TextView tvName, tvUsername, tvStreak;
+        TextView tvName, tvUsername, tvStreak, btnEliminar;
         VH(View v) {
             super(v);
-            tvName     = v.findViewById(R.id.tvName);
-            tvUsername = v.findViewById(R.id.tvUsername);
-            tvStreak   = v.findViewById(R.id.tvStreak);
+            tvName      = v.findViewById(R.id.tvName);
+            tvUsername  = v.findViewById(R.id.tvUsername);
+            tvStreak    = v.findViewById(R.id.tvStreak);
+            btnEliminar = v.findViewById(R.id.btnEliminar);
         }
     }
 }
